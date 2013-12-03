@@ -1,12 +1,12 @@
 # Lesson 4 - Even more CSS!
 
-**Transitions, Transformations & Animations!**
+**Transitions, transformations & animations!**
 
 ## Overview
 
 We've spent the last couple of weeks learning both basic and more advanced CSS, and this week we're going to make our pages *move*. What do I mean by *move*? I mean that we're going to learn about how to add *movement* to our websites using CSS transitions and animations! We're going to start out by playing around with how transitions and animations work on their own, and then we're going to take what we've learned and write some transitions or animations for the pages we've been working on over the past four weeks.
 
-## Diving In
+## Diving in
 
 We're going to get back to your projects in a bit, but for now we're just going to get our hands dirty. I want everybody to go to CodePen and [create a new pen](http://codepen.io/pen/). Uncheck the checkbox in the JS panel:
 
@@ -69,4 +69,12 @@ We've added three new properties, all starting with “transition-”. These thr
 
 ## Transforms
 
-Let's make our box do something else when we hover on it. Let's say that when we hover on the box we want it to get *bigger*. In order to do this we're going to need to use something called **CSS Transforms**, a part of CSS that allows us to change the size, position and rotation of objects. 
+Let's make our box do something else when we hover on it. Let's say that when we hover on the box we want it to get *bigger*. In order to do this we're going to need to use something called **CSS Transforms**, a part of CSS that allows us to change the size, position and rotation of objects.
+
+## Advanced lesson notes!
+
+Working ahead? Bored? Done this before? No problem. Here are some more advanced topics related to the lesson that you can explore or read more about.
+
+### Stacking contexts
+
+In the [Transforms sections](#transforms) did you notice how we defined `transform` twice, once to set the scale to 1 and again to set it to 1.5 when we hover? Try removing that first one and then hover on your square again. Notice how the box flickers a little before it starts animating? This is because CSS Transforms create a new [stacking context](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Understanding_z_index/The_stacking_context). The flicker is caused by our box moving onto a new stacking context when we hover on it. By setting the transform in both places, we tell the browser to make sure the box is *already* on its own stacking context. That way, when we hover on it, it doesn't need to switch contexts, and it doesn't flicker.
