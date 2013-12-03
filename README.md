@@ -16,7 +16,7 @@ and then click on the gear next to the CSS section, and make sure that the box t
 
 ![](http://f.cl.ly/items/3s3C2r281s193P1V2g0z/Screen-Shot-2013-12-02-at-8.00.30-PM.jpg)
 
-## Transitions
+## Basic transitions
 
 To get a better idea of how transitions work, we're going to create a simple example. In our HTML, we're going to create a single element, a `<div>` with a class of `box`.
 
@@ -67,9 +67,20 @@ We've added three new properties, all starting with “transition-”. These thr
 
 *Try hovering on your box again.* Tada! With our new CSS, we're now *transitioning* from one background color to the next. Now try changing the `transition-duration` value to something longer, like “5s”. When you hover on your box again, it will take much longer (5 seconds, to be exact) to transition from your first color, “silver”, to your second color. After you've experimented, let's go ahead and set the duration to “0.5s”, or a half of a second, to make it quick to see our transitions when we make changes.
 
-## Transforms
+## Basic transforms
 
-Let's make our box do something else when we hover on it. Let's say that when we hover on the box we want it to get *bigger*. In order to do this we're going to need to use something called **CSS Transforms**, a part of CSS that allows us to change the size, position and rotation of objects.
+Let's make our box do something else when we hover on it. Let's say that when we hover on the box we want it to get *bigger*. In order to do this we're going to need to use something called **CSS Transforms**, a part of CSS that allows us to change the size, position and rotation of objects. To start, let's add two lines of CSS to what we have.
+
+``` scss
+.box {
+  // ...
+  transform: scale(1);
+}
+.box:hover {
+  // ...
+  transform: scale(1.5);
+}
+```
 
 ## Advanced lesson notes!
 
