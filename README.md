@@ -8,4 +8,4 @@ We've spent the last couple of weeks learning both basic and more advanced CSS, 
 
 We're going to get back to your projects in a bit, but for now we're just going to get our hands dirty. I want everybody to go to CodePen and create a new pen. Uncheck the checkbox in the JS panel:
 
-![](/screenshots/Screen-Shot-2013-12-02-at-7.52.32-PM.jpg)
+![](//Screen-Shot-2013-12-02-at-7.52.32-PM.jpg)
