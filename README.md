@@ -30,7 +30,7 @@ And to our CSS we'll add some simple styles to center the box, set its width and
 .box {
   width: 100px;
   height: 100px;
-  margin: 20px auto;
+  margin: 100px auto;
   background: silver;
 }
 .box:hover {
@@ -51,21 +51,15 @@ Now when we hover on our box, it changes to the new color we specified. By defau
 
 ``` css
 .box {
-  width: 100px;
-  height: 100px;
-  margin: 20px auto;
-  background: silver;
+  // ...
   transition-property: background;
   transition-duration: 1s;
   transition-timing-function: ease;
 }
-.box:hover {
-  background: silver;
-}
 ```
 We've added three new properties, all starting with “transition-”. These three properties tell the browser the three things it needs to know about what you want to transition: the *properties* you want to transition, *how many seconds*, or *how long*, it should take to transition from one value to the next, and the *timing* of the transition.
 
-*Try hovering on your box again.* Tada! With our new CSS, we're now *transitioning* from one background color to the next. Now try changing the `transition-duration` value to something longer, like “5s”. When you hover on your box again, it will take much longer (5 seconds, to be exact) to transition from your first color, “silver”, to your second color. After you've experimented, let's go ahead and set the duration to “0.5s”, or a half of a second, to make it quick to see our transitions when we make changes.
+*Try hovering on your box again.* **Tada!** With our new CSS, we're now *transitioning* from one background color to the next. Now try changing the `transition-duration` value to something longer, like “5s”. When you hover on your box again, it will take much longer (5 seconds, to be exact) to transition from your first color, “silver”, to your second color. After you've experimented, let's go ahead and set the duration to “0.5s”, or a half of a second, to make it quick to see our transitions when we make changes.
 
 ## Basic transforms
 
@@ -81,6 +75,28 @@ Let's make our box do something else when we hover on it. Let's say that when we
   transform: scale(1.5);
 }
 ```
+
+Once again, hover over your box. AH! What's happening? The square is getting bigger when we hover, but it's *jumping* to the new property value, just like our background color was earlier. *Who thinks they know how to have the scale be transitioned as well?*
+
+After appending `transform` to the value of `transition-property`, we get something that looks like this:
+
+``` scss
+transform-property: background, transform;
+}
+```
+
+This line now tells the browser that for our class `.box` we want to transition *both* the background and transform properties. Hover over that box again and see that we've successfully instructed the browser to smoothly transition the scale of the box as well.
+
+So now the question is: **what else can we do with transforms**? Well, for one, we can chain transforms together but adding more to the value of our `transform` property. Try changing the `transform` property for when we hover on the box to include rotation:
+
+``` scss
+.box:hover {
+  // ...
+  transform: scale(1.5) rotate(45deg);
+}
+```
+
+Rotation transforms use “degrees” as a unit. These are the same kind of degrees you may have learned in math class, like how a circle has 360 degrees, or a halfpipe in sports is 180 degrees. We're saying that we want to rotate our box 45 degrees when we hover on it, or about 1/8th of a full rotation.
 
 ## Advanced lesson notes!
 
