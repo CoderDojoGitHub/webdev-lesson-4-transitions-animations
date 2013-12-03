@@ -63,12 +63,13 @@ We've added three new properties, all starting with “transition-”. These thr
 
 ## Basic transforms
 
-Let's make our box do something else when we hover on it. Let's say that when we hover on the box we want it to get *bigger*. In order to do this we're going to need to use something called **CSS Transforms**, a part of CSS that allows us to change the size, position and rotation of objects. To start, let's add two lines of CSS to what we have.
+Let's make our box do something else when we hover on it. Let's say that when we hover on the box we want it to get *bigger*. In order to do this we're going to need to use something called **CSS Transforms**, a part of CSS that allows us to change the size, position and rotation of objects. To start, let's add a few lines of CSS to what we have.
 
 ``` scss
 .box {
   // ...
   transform: scale(1);
+  backface-visibility: hidden;
 }
 .box:hover {
   // ...
@@ -87,7 +88,7 @@ transform-property: background, transform;
 
 This line now tells the browser that for our class `.box` we want to transition *both* the background and transform properties. Hover over that box again and see that we've successfully instructed the browser to smoothly transition the scale of the box as well.
 
-So now the question is: **what else can we do with transforms**? Well, for one, we can chain transforms together but adding more to the value of our `transform` property. Try changing the `transform` property for when we hover on the box to include rotation:
+So now the question is: **what else can we do with transforms**? Well, for one, we can chain transforms together by adding to the value of our `transform` property. Try changing the `transform` property for when we hover on the box to include rotation:
 
 ``` scss
 .box:hover {
@@ -98,9 +99,32 @@ So now the question is: **what else can we do with transforms**? Well, for one, 
 
 Rotation transforms use “degrees” as a unit. These are the same kind of degrees you may have learned in math class, like how a circle has 360 degrees, or a halfpipe in sports is 180 degrees. We're saying that we want to rotate our box 45 degrees when we hover on it, or about 1/8th of a full rotation.
 
+Now I want you to think of a chain of transforms that you want to apply to your box when you hover on it. Maybe you want it to shrink, move to the left, and do a full spin. Maybe it will grow only horizontally, and rotate just slightly as if to say, “may I help you?”. Take some time now to create an interesting chain of transforms. You can combine any of these:
+
+* scale(2) - Makes the box double its original size
+* scaleX(1.5) - Scales the *width* of the box to be 1.5 times its original width
+* scaleY(3) - Scales the *height* of the box to be 3 times its original height
+* rotate(10deg) - Rotates the whole box by 10 degrees
+* translateX(50px) - Moves the box 50 pixels to the *right*. Negative values move it *left*.
+* translateY(100px) - Moves the box 100 pixels *down*. Negative values move it *up*.
+
+Here's an example:
+
+``` scss
+transform: translateX(-50px) translateY(100px) rotate(90deg);
+```
+
+This transform would make our box move 50 pixels to the left (`translateX(-50px)`), 100 pixels down (`translateY(100px)`) and rotate 90 degrees (`rotate(90deg)`).
+
 ## Advanced lesson notes!
 
 Working ahead? Bored? Done this before? No problem. Here are some more advanced topics related to the lesson that you can explore or read more about.
+
+### Timing functions
+
+Remember that `transition-timing-function` property we've been using? Curious about what it's for?
+
+@todo
 
 ### Stacking contexts
 
