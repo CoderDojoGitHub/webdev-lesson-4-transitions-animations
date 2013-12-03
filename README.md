@@ -8,7 +8,7 @@ We've spent the last couple of weeks learning both basic and more advanced CSS, 
 
 ## Diving In
 
-We're going to get back to your projects in a bit, but for now we're just going to get our hands dirty. I want everybody to go to CodePen and create a new pen. Uncheck the checkbox in the JS panel:
+We're going to get back to your projects in a bit, but for now we're just going to get our hands dirty. I want everybody to go to CodePen and [create a new pen](http://codepen.io/pen/). Uncheck the checkbox in the JS panel:
 
 ![](http://f.cl.ly/items/2n1z1d2c1m3p0Y121j2l/Screen-Shot-2013-12-02-at-7.52.32-PM.jpg)
 
@@ -65,7 +65,8 @@ Now when we hover on our box, it changes to the new color we specified. By defau
 ```
 We've added three new properties, all starting with “transition-”. These three properties tell the browser the three things it needs to know about what you want to transition: the *properties* you want to transition, *how many seconds*, or *how long*, it should take to transition from one value to the next, and the *timing* of the transition.
 
-*Try hovering on your box again.* Tada! With our new CSS, we're now *transitioning* from one background color to the next. Now try changing the `transition-duration` value to something longer, like “5s”. When you hover on your box again, it will take much longer (5 seconds, to be exact) to transition from your first color, “silver”, to your second color.
+*Try hovering on your box again.* Tada! With our new CSS, we're now *transitioning* from one background color to the next. Now try changing the `transition-duration` value to something longer, like “5s”. When you hover on your box again, it will take much longer (5 seconds, to be exact) to transition from your first color, “silver”, to your second color. After you've experimented, let's go ahead and set the duration to “0.5s”, or a half of a second, to make it quick to see our transitions when we make changes.
 
+## Transforms
 
-
+Let's make our box do something else when we hover on it. Let's say that when we hover on the box we want it to get *bigger*. In order to do this we're going to need to use something called **CSS Transforms**, a part of CSS that allows us to change the size, position and rotation of objects. 
