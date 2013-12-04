@@ -174,6 +174,8 @@ Imagine that the two sides of a playing card are actually two separate pieces of
 ```css
 .card {
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 .card-image,
 .card-caption {
@@ -195,7 +197,36 @@ Now we can see both our caption *and* our image on the page:
 
 ![](http://f.cl.ly/items/0T1s0I1y3f2z3u0b0L3V/Screen%20Shot%202013-12-04%20at%2012.31.36%20AM.png)
 
-Now it's time to use what we learned earlier with transitions and transforms!
+Now it's time to use what we learned earlier with transitions and transforms! Remember what I said before about having two sides of a card, and needing to flip one around to face the other direction? *Can anybody think of something we learned earlier with our boxes that would allow us to **rotate** our caption to face the other way?*
+
+By using a rotate transform, we can rotate our caption a half turn away from us, 180 degrees, so it's facing the other direction, just like the other side of a playing card.
+
+```css
+.card-caption {
+  transform: rotateY(180deg);
+}
+```
+
+But wait, we can still see it, it's just *backwards*! When we can the reverse side of an object like this, we call it a “backface”. For those of you here who play Minecraft, do you know how sometimes the ground on the map disappears and you can see through the world down to caves and dungeons? Well... when that happens, what you're actually seeing are the *backfaces* of those other parts of the world. In our case, we really *don't* want to see the backface of our caption, so let's hide it.
+
+In our selector for `.card-image, .card-caption` we're going to specify that backfaces should be “hidden”:
+
+```css
+.card-image,
+.card-caption {
+  /* ... */
+  backface-visibility: hidden;
+}
+```
+
+So now we're back to just seeing the image. But the caption is still there, it's just on the other side, out of view. If you don't believe me, let me prove it. At this point, what if we spun the entire card around again. We would expect to see the caption again, right? Let's try it:
+
+```css
+.card {
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+}
+```
 
 ## Advanced lesson notes!
 
