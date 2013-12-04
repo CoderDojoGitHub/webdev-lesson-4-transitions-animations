@@ -169,6 +169,8 @@ The first thing we'll do is get our image displaying. Up until now, we've been p
 
 Hmm, but we don't actually see anything, even after putting in our background image. Well... that's because the `<div>` that our background image is on doesn't actually have any content in it, so its height is still 0. What we really want is for the image to take up the entire width and height of our card. In fact, we want the caption to take up the whole height and width as well. To do that, we're going to use something we learned last session: absolute positioning. We're going to put the caption and the image directly on top of each other.
 
+## Making our card flip
+
 Imagine that the two sides of a playing card are actually two separate pieces of paper. In order to “build” the card we would want to put lay them flat on top of each other, and then flip the one on bottom around so it faces the other direction. We're going to do the same thing with our containers. First let's position them on top of one another and make them be the full width and height of our card.
 
 ```css
@@ -207,7 +209,11 @@ By using a rotate transform, we can rotate our caption a half turn away from us,
 }
 ```
 
-But wait, we can still see it, it's just *backwards*! When we can the reverse side of an object like this, we call it a “backface”. For those of you here who play Minecraft, do you know how sometimes the ground on the map disappears and you can see through the world down to caves and dungeons? Well... when that happens, what you're actually seeing are the *backfaces* of those other parts of the world. In our case, we really *don't* want to see the backface of our caption, so let's hide it.
+But wait, we can still see it, it's just *backwards*!
+
+![](http://f.cl.ly/items/2A463e353A3y1y3e1v1I/Screen%20Shot%202013-12-04%20at%2012.52.25%20AM.png)
+
+When we can the reverse side of an object like this, we call it a “backface”. For those of you here who play Minecraft, do you know how sometimes the ground on the map disappears and you can see through the world down to caves and dungeons? Well... when that happens, what you're actually seeing are the *backfaces* of those other parts of the world. In our case, we really *don't* want to see the backface of our caption, so let's hide it.
 
 In our selector for `.card-image, .card-caption` we're going to specify that backfaces should be “hidden”:
 
@@ -219,7 +225,7 @@ In our selector for `.card-image, .card-caption` we're going to specify that bac
 }
 ```
 
-So now we're back to just seeing the image. But the caption is still there, it's just on the other side, out of view. If you don't believe me, let me prove it. At this point, what if we spun the entire card around again. We would expect to see the caption again, right? Let's try it:
+So now we're back to just seeing the image. The caption is still there, it's just on the other side, out of view. If you don't believe me, I'll prove it. At this point, what if we spun the entire card around again. We would expect to see the caption again, right? Let's try it:
 
 ```css
 .card {
@@ -227,6 +233,34 @@ So now we're back to just seeing the image. But the caption is still there, it's
   transform-style: preserve-3d;
 }
 ```
+
+There's our caption again, and we can even see our background color through it!
+
+![](http://f.cl.ly/items/1k0u403J0F3H2z453O2K/Screen%20Shot%202013-12-04%20at%2012.54.56%20AM.png)
+
+So what's left? Well, we only want to see our caption when we're hovering on the image, so let's move the `transform` that we just added to a `:hover` selector. We're going to say that when we hover on the entire card, on the `.card-container`, we'll rotate the `.card` by 180 degrees. Move the transform from above into a new selector like this:
+
+```css
+.card-container:hover .card {
+  transform: rotateY(180deg);
+}
+```
+
+And *now* when we hover on our card we should see the caption appear! But it happens all at once, just like the changing background color on our boxes way back at the beginning. So what's the last step? That's right… **transitions**!
+
+In the `.card` selector, we'll specify the simplest transition we can by just telling the browser *how long* the transition should take:
+
+```css
+.card {
+  /* ... */
+  transition-duration: 0.5s;
+}
+```
+
+## Finishing up
+
+@todo: card caption styles
+@todo: perspective
 
 ## Advanced lesson notes!
 
