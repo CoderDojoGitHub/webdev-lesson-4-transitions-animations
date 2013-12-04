@@ -128,7 +128,9 @@ Here's my box for you to check out: http://codepen.io/mikefowler/pen/DyIHE
 
 ## Back to our projects!
 
-Ok, believe it or not, we just learned enough to go back to our projects that we've been working on and make something cool with the help of transitions and transforms.
+Ok, believe it or not, we just learned enough to go back to our projects that we've been working on and make something cool with the help of transitions and transforms. We're going to make an interesting way to show captions for your images. It's going to look something like this: http://codepen.io/mikefowler/pen/vKowl
+
+@todo
 
 ## Advanced lesson notes!
 
