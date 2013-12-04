@@ -1,10 +1,10 @@
 # Lesson 4 - Even more CSS!
 
-**Transitions, transformations & animations!**
+**Transitions and transforms!**
 
 ## Overview
 
-We've spent the last couple of weeks learning both basic and more advanced CSS, and this week we're going to make our pages *move*. What do I mean by *move*? I mean that we're going to learn about how to add *movement* to our websites using CSS “transitions” and “animations”, and another thing called “transforms”! We're going to start out by playing around with how transitions, transforms, and animations work on their own, and then we're going to take what we've learned and write some transitions or animations for the pages we've been working on over the past three lessons.
+We've spent the last couple of weeks learning both basic and more advanced CSS, and this week we're going to make our pages *move*. What do I mean by *move*? I mean that we're going to learn about how to add *movement* to our websites using CSS “transitions” and “transforms”! We're going to start out by playing around with how transitions and transforms work on their own, and then we're going to take what we've learned and write some transitions and transforms of our own for the pages we've been working on over the past three lessons.
 
 ## Diving in
 
@@ -20,13 +20,13 @@ and then click on the gear next to the CSS section, and make sure that the check
 
 To get a better idea of how transitions work, we're going to create a simple example. In our HTML, we're going to create a single element, a `<div>` with a class of `box`.
 
-``` html
+```html
 <div class="box"></div>
 ```
 
 To our CSS we'll add some simple styles to center the box, set its width and height, and make the background silver. Go ahead and just copy and paste this into your CSS area:
 
-``` scss
+```css
 .box {
   width: 100px;
   height: 100px;
@@ -51,9 +51,9 @@ Now when we hover on our box, it changes to the new color we specified. By defau
 
 **CSS Transitions allow us animate, or “transition”, the changing of a property in CSS.** Let's add a few more lines of CSS:
 
-``` scss
+```css
 .box {
-  // ...
+  /* ... */
   transition-property: background;
   transition-duration: 1s;
   transition-timing-function: ease;
@@ -68,17 +68,17 @@ We've added three new properties, all starting with “transition-”. These thr
 
 Let's make our box do something else when we hover on it. Let's say that when we hover on the box we want it to get *bigger*. One way to do this would be to change the height and width of the element when we hover on it. However, changing the height and the width will affect the position of elements *around* our box, and we might not want that. Instead we're going to use something called **CSS Transforms**, a part of CSS that allows us to change the size, position and rotation of objects *without* affecting things around it, or what we would say is the “flow” of our document. To start, let's add a few lines of CSS to what we have.
 
-``` scss
+```css
 body {
   perspective: 1000;
 }
 .box {
-  // ...
+  /* ... */
   transform: scale(1);
   backface-visibility: hidden;
 }
 .box:hover {
-  // ...
+  /* ... */
   transform: scale(1.5);
 }
 ```
@@ -87,7 +87,7 @@ Once again, hover over your box. AH! What's happening? The square is getting big
 
 After appending `transform` to the value of `transition-property`, we get something that looks like this:
 
-``` scss
+```css
 transform-property: background, transform;
 }
 ```
@@ -96,9 +96,9 @@ This line now tells the browser that for our class `.box` we want to transition 
 
 So now the question is: **what else can we do with transforms**? Well, for one, we can chain transforms together by adding to the value of our `transform` property. Try changing the `transform` property for when we hover on the box to include rotation:
 
-``` scss
+```css
 .box:hover {
-  // ...
+  /* ... */
   transform: scale(1.5) rotate(45deg);
 }
 ```
@@ -118,8 +118,11 @@ Now I want you to think of a combination of transforms that you want to apply to
 
 Here's an example:
 
-``` scss
-transform: rotateY(30deg) rotateX(10deg) scale(1.5);
+```css
+.box:hover {
+  /* ... */
+  transform: rotateY(30deg) rotateX(10deg) scale(1.5);
+}
 ```
 
 This transform would make our box rotate a little bit to the right (`rotateY(3deg)`), rotate a little bit away from us (`rotateX(10deg)`) and grow to be 1.5 times its original size (`scale(1.5)`).
@@ -130,7 +133,69 @@ Here's my box for you to check out: http://codepen.io/mikefowler/pen/DyIHE
 
 Ok, believe it or not, we just learned enough to go back to our projects that we've been working on and make something cool with the help of transitions and transforms. We're going to make an interesting way to show captions for your images. It's going to look something like this: http://codepen.io/mikefowler/pen/vKowl
 
-@todo
+We're going to call this a “card”, because it's a little bit like a playing card that you put face down on the table, and then you pick it up and turn it over to see the other side. Let's start by adding some HTML to our page, way down at the very bottom.
+
+```html
+<div class="card-container">
+  <div class="card">
+    <div class="card-image"></div>
+    <div class="card-caption"></div>
+  </div>
+</div>
+```
+
+Of course, we're not going to see anything here at first, because there's no content! We just have a bunch of empty containers. *Let's change that.* The first thing we want to do is give our “card” some dimensions, and give it a background so we can see what's going on.
+
+```css
+.card-container {
+  background: salmon;
+  width: 400px;
+  height: 200px;
+}
+```
+
+Now we can see our card on the screen, with the background color we gave it. It's 400 pixels wide, and 200 pixels tall.
+
+![](http://f.cl.ly/items/3w3d3p2H3r0m3D2K2k1U/Screen%20Shot%202013-12-03%20at%2011.53.28%20PM.png)
+
+The first thing we'll do is get our image displaying. Up until now, we've been putting our images into our HTML as `<img>` tags. We can also add images via CSS by setting the background of an element to be an image. Let's use the same image we started with three lessons ago, of Hoyt's dogs at the park. We're going to add a selector in our CSS for the `card-image` class we wrote earlier. The `background-size` property will make sure that we can see our entire image.
+
+```css
+.card-image {
+  background: url(http://f.cl.ly/items/2f473l1d233S0S1k3J3d/dogs-playing.jpg);
+  background-size: cover;
+}
+```
+
+Hmm, but we don't actually see anything, even after putting in our background image. Well... that's because the `<div>` that our background image is on doesn't actually have any content in it, so its height is still 0. What we really want is for the image to take up the entire width and height of our card. In fact, we want the caption to take up the whole height and width as well. To do that, we're going to use something we learned last session: absolute positioning. We're going to put the caption and the image directly on top of each other.
+
+Imagine that the two sides of a playing card are actually two separate pieces of paper. In order to “build” the card we would want to put lay them flat on top of each other, and then flip the one on bottom around so it faces the other direction. We're going to do the same thing with our containers. First let's position them on top of one another and make them be the full width and height of our card.
+
+```css
+.card {
+  position: relative;
+}
+.card-image,
+.card-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+```
+
+We'll also add a caption to our HTML:
+
+```html
+<div class="card-caption">Today we played at the dog park.</div>
+```
+
+Now we can see both our caption *and* our image on the page:
+
+![](http://f.cl.ly/items/0T1s0I1y3f2z3u0b0L3V/Screen%20Shot%202013-12-04%20at%2012.31.36%20AM.png)
+
+Now it's time to use what we learned earlier with transitions and transforms!
 
 ## Advanced lesson notes!
 
