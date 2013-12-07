@@ -162,7 +162,7 @@ The first thing we'll do is get our image displaying. Up until now, we've been p
 
 ```css
 .card-image {
-  background: url(http://f.cl.ly/items/2f473l1d233S0S1k3J3d/dogs-playing.jpg);
+  background: url(http://bit.ly/18JND2I);
   background-size: cover;
 }
 ```
@@ -257,10 +257,106 @@ In the `.card` selector, we'll specify the simplest transition we can by just te
 }
 ```
 
-## Finishing up
+Now when you hover on your card it should flip over, nice and smoothly! Let's add to this a bit. You'll remember from earlier the `perspective` property I mentioned but glanced over. We set `perspective` on the *parent* of elements we're transforming to change the way it looks when elements are rotated or scaled in our 3D space. The *smaller* the value of perspective gets, the more *extreme* our rotations are going to get. Let's try adding perspective to our card container:
 
-@todo: card caption styles
-@todo: perspective
+```css
+.card-container {
+  /* ... */
+  perspective: 1000px;
+}
+```
+
+Now try hovering over your card again and notice how it looks a bit different when it flips over, almost like it's popping out of the screen towards. This is the effect of changing perspective. Go ahead and play around with different pixels values for `perspective`. Try `perspective: 5000px;` and notice how it's almost the same as when we didn't have *any* perspective, and then try `perspective: 20px;` to compare.
+
+## Finishing up our card
+
+To wrap up our card we can add some additional styles to our caption to make it a bit prettier. Let's center the caption text in the screen and make the text white so it stands out better against our `salmon` color. We'll also add some padding so it sits closer to the center and make the text bigger.
+
+```css
+.card-caption {
+  /* ... */
+  text-align: center;
+  color: white;
+  box-sizing: border-box;
+  padding: 10%;
+  font-size: 2em;
+}
+```
+
+## A quick intro to animations
+
+Similar to CSS Transitions, CSS Animations allow us to "animate" between properties. Animations, however, give us far greater control, and allows to do more than just “transition value X to Y”. While animations can range from complex to even *more* complex, I'm going to show you the basic syntax and you can explore from there.
+
+In our code, let's add a class to our existing `card-image` div. We'll call it `wobble`.
+
+```html
+<div class="card-image wobble"></div>
+```
+
+The first thing we'll want to do is add a new selector for our `wobble` class and define an animation name. We can name our animation whatever we want, and in this case we'll name it “wobble” to match our class name. We'll also tell the browser that we want the animation to take one second to complete:
+
+```css
+.wobble {
+  animation-name: wobble;
+  animation-duration: 1s;
+}
+```
+
+When we write animations, we write a series of “keyframes”. These “keyframes” specify the values of CSS properties at different points in the animation. For example, to create an animation that makes an object fade in and then back out again, we would create keyframes like this:
+
+```css
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+```
+
+In this animation, which we've named “flash”, we're telling the browser: “start at `opacity: 0;`, increase to `opacity: 1;` at 50%, or *halfway* through the animation, and then go back to `opacity: 0;` at 100%, when our animation is complete. Keeping that in mind, let's make that wobble animation we talked about.
+
+Above we gave our `.wobble` class an animation named “wobble”, so when we create our keyframes we're going to use the same name. In our keyframes, we're going to rotate our card a little bit one way, and then a little bit back the other way, and then end up back in the center. Wobbly! Let's try something like this:
+
+```css
+@keyframes wobble {
+  25% {
+    transform: rotate(2deg);
+  }
+  75%: {
+    transform: rotate(-2deg);
+  }
+}
+```
+
+Did you see it animate?? If you didn't catch it, try changing one of the values again. We have the animation working, but in this case we probably want the animation to repeat. We can do this easily by telling the browser that we want the animation to repeat *infinitely*. We could also specify a number instead of “infinite” and the animation would repeat that number of times before stopping.
+
+```css
+.wobble {
+  /* ... */
+  animation-iteration-count: infinite;
+}
+```
+
+With that, you know the basics of creating an animation. The percentages we used for our keyframes can be whatever you want, and there can be more than two. Any CSS property you can think of you can put inside a keyframe, so go crazy! Think of an animation in your head and then try to create it using a series of keyframes that change properties.
+
+Here's our card, wobbling a bit: http://codepen.io/mikefowler/pen/qeHmE
+
+## Wrapping up
+
+**You're done!** Nice job. If you're interested in reading more about CSS Transitions, CSS Transforms or CSS Animations, check out the links below, and be sure to check out the advanced lesson notes.
+
+## Additional resources
+
+* [All you need to know about CSS Transitions](http://blog.alexmaccaw.com/css-transitions)
+* [Intro to 3D transforms](http://desandro.github.io/3dtransforms/)
+* [Animation on CSS Tricks](http://css-tricks.com/almanac/properties/a/animation/)
+* [Using CSS transitions on MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transitions)
+* [Using CSS animations on MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_animations)
 
 ## Advanced lesson notes!
 
@@ -268,9 +364,7 @@ Working ahead? Bored? Done this before? No problem. Here are some more advanced 
 
 ### Timing functions
 
-Remember that `transition-timing-function` property we've been using? Curious about what it's for?
-
-@todo
+Remember that `transition-timing-function` property we've been using? Curious about what it's for? [Check it out...](http://css-tricks.com/almanac/properties/t/transition-timing-function/)
 
 ### Stacking contexts
 
